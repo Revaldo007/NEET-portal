@@ -1,0 +1,32 @@
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
+const client = axios.create({ baseURL: BASE_URL });
+
+client.interceptors.request.use((config) => {
+  const token = localStorage.getItem("neet_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+client.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("neet_token");
+      localStorage.removeItem("neet_role");
+      localStorage.removeItem("neet_name");
+      if (!window.location.pathname.includes("/login")) {
+        window.location.href = "/login";
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export const fileUrl = (path) => `${BASE_URL}/uploads/${path}`;
+
+export default client;
