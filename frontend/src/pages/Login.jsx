@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import DeveloperBadge from "../components/DeveloperBadge";
 
 export default function Login() {
   const { login } = useAuth();
@@ -25,7 +26,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 ledger-bg">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 ledger-bg relative">
       <div className="w-full max-w-md doc-card doc-card-accent p-8">
         <p className="text-xs font-semibold tracking-wide text-[var(--color-teal)] mb-1">NEET EXAMINATION PORTAL</p>
         <h1 className="font-display text-2xl mb-6">Sign in to your account</h1>
@@ -71,6 +72,8 @@ export default function Login() {
           </Link>
         </p>
       </div>
+
+      <DeveloperBadge />
     </div>
   );
 }
