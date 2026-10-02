@@ -39,6 +39,8 @@ const css = `
 
   /* Very short windows: drop the decorative answer sheet so the text is never squeezed */
   @media (max-height: 620px) { .auth-omr { display: none; } }
+  /* Narrow desktop windows: no room for both the answer sheet and the badge */
+  @media (max-width: 1149px) { .auth-omr { display: none; } }
   @media (prefers-reduced-motion: reduce) { .omr-filled { animation: none; } }
 `;
 
